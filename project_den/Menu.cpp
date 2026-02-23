@@ -80,9 +80,42 @@ void start::findKlient(string number)
 {
     string line;
     ifstream fileData("Data.txt");
+    bool found = false;
+
     if (fileData.is_open())
     {
         while (getline(fileData, line))
+        {
+            if (line.find("Телефон: " + number) != string::npos)
+            {
+                found = true;
+                cout << "Клиент найден!" << endl;
+                cout << line << endl;
+                break; 
+            }
+        }
+        fileData.close();
+
+        if (!found)
+        {
+            string que;
+            cout << "Клиент с номером " << number << " не найден." << endl;
+            cout << "Хотите зарегистрироваться? \n 1) Да \n 2) Нет" << endl;
+            cin >> que;
+            if (que == "1" || que == "да" || que == "Да")
+            {
+                registr();
+                //дальше код димы и сергея. Спросить какую стрижку нужно и тд по тз.
+            }
+            else if (que == "2" || que == "Нет" || que == "нет")
+            {
+                //дальше код димы и сергея. Спросить какую стрижку нужно и тд по тз.
+            }
+        }
+    }
+    else
+    {
+        cout << "Ошибка открытия файла Data.txt" << endl;
     }
 }
 
